@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">BOOK STORE</string>
-    <string name="logo">BOOK STORE</string>
+    <string name="app_name">KNOWLEDGE WOLRD</string>
+    <string name="logo">KNOWLEDGE WOLRD</string>
     <string name="title_home">Trang chủ</string>
     <string name="title_search">Tìm kiếm</string>
     <string name="title_cart">Giỏ hàng</string>
@@ -9,7 +9,7 @@
     <string name="title_list">Danh sách</string>
     <string name="title_order">Đơn hàng</string>
     <string name="title_category">Thể loại</string>
-    <string name="title_service">Chính sách khách hàng tại BookStore</string>
+    <string name="title_service">Chính sách khách hàng tại Knowledge World</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="large_text">
