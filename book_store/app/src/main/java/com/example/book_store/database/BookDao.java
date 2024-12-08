@@ -27,26 +27,13 @@ public class BookDao {
         myRef = database.getReference("Books");
         this.context = context;
     }
-    public boolean addBook(Book book){
-        final boolean[] result = new boolean[1];
-        //Add to DB
+    public void addBook(Book book, OnCompleteListener<Void> callback) {
+        // Add to DB
         String id = myRef.push().getKey();
         book.setId(id);
-        myRef.child(book.getId()).setValue(book).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    result[0] = true;
-                    Toast.makeText(context, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
-                }
 
-                else {
-                    result[0] = false;
-                    Toast.makeText(context, "Thêm sách thất bại", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        return result[0];
+        // Set value and attach callback
+        myRef.child(book.getId()).setValue(book).addOnCompleteListener(callback);
     }
     public boolean updateBook(String id,String title,String author,String category,String imgURL,int year,int price,int inStock,String desc,int isActive){
         final boolean[] result = new boolean[1];
