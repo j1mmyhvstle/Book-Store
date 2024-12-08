@@ -126,60 +126,6 @@ public class CRUDFragment extends Fragment {
                 if(!swActive.isChecked()){
                     isActive = 0;
                 }
-//                if(isValid(title,author,category,year,price,inStock,desc)){
-//                    //Upload image and get link
-//                    if(imgUri != null){
-//                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
-//                        Date now = new Date();
-//                        String fileName = formatter.format(now);
-//                        storageReference = FirebaseStorage.getInstance().getReference("images/"+fileName);
-//                        int finalIsActive = isActive;
-//                        storageReference.putFile(imgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                    @Override
-//                                    public void onSuccess(Uri uri) {
-//                                        String imgURL = uri.toString();
-//                                        book.setImgURL(imgURL);
-//                                        //Add to DB
-//                                        if(book.getImgURL() != null){
-//                                            //Create book object
-//                                            book.setTitle(title);
-//                                            book.setAuthor(author);
-//                                            book.setCategory(category);
-//                                            book.setYear(Integer.parseInt(year));
-//                                            book.setPrice(Integer.parseInt(price));
-//                                            book.setInStock(Integer.parseInt(inStock));
-//                                            book.setDescription(desc);
-//                                            book.setIsActive(finalIsActive);
-//                                            if(dao.addBook(book)){
-//                                                clearEditText();
-//                                            }
-//                                            dialog.dismiss();
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                dialog.dismiss();
-//                                Toast.makeText(getContext(), "Tải hình ảnh thất bại", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//                            @Override
-//                            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-//                                dialog.show();
-//                            }
-//                        });
-//
-//                    }
-//                    else {
-//                        Toast.makeText(getContext(), "Ảnh bìa không được để trống", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                }
                 if (isValid(title, author, category, year, price, inStock, desc)) {
                     // Kiểm tra URL trong EditText
                     String inputImageUrl = txtImageUrl.getText().toString().trim();
@@ -242,7 +188,11 @@ public class CRUDFragment extends Fragment {
         txtNum.setText("");
         txtPrice.setText("");
         txtYear.setText("");
-        img.setImageResource(R.drawable.ic_menu_gallery);
+        txtImageUrl.setText("");
+        swActive.setChecked(true);
+        if (!categorys.isEmpty()) {
+            snCategory.setSelection(0);
+        }
     }
     //progress dialog
     private void setProgressDialog() {
@@ -298,13 +248,14 @@ public class CRUDFragment extends Fragment {
         book.setInStock(Integer.parseInt(inStock));
         book.setDescription(desc);
         book.setIsActive(isActive);
-        if (dao.addBook(book)) {
-            clearEditText();
-            Toast.makeText(getContext(), "Thêm sách thành công", Toast.LENGTH_SHORT).show();
-        } else {
-            clearEditText();
-            Toast.makeText(getContext(), "Thêm sách thất bại", Toast.LENGTH_SHORT).show();
-        }
+        dao.addBook(book, task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(getContext(), "Thêm sách thành công", Toast.LENGTH_SHORT).show();
+                clearEditText();
+            } else {
+                Toast.makeText(getContext(), "Thêm sách thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
         //dialog.dismiss();
     }
 }
