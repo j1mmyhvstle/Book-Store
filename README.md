@@ -19,8 +19,8 @@ Xây dựng ứng dụng bán hàng di động đáp ứng nhu cầu quản lý 
 - Trần Nhật Khánh - Tác giả chính: [GitHub](https://github.com/tnKiness)
 - Nguyễn Phụng Châu - Đồng tác giả: [GitHub](https://github.com/j1mmyhvstle)
 - Lê Lộc Sơn - Đồng tác giả: [GitHub](https://github.com/SonLocLe)
-- Đinh Duy Thống- Đồng tác giả: [GitHub](#)
-- Lê Hoàng Khang - Đồng tác giả: [GitHub](#)
+- Đinh Duy Thống- Đồng tác giả: [GitHub](https://github.com/UEHPoemm)
+- Lê Hoàng Khang - Đồng tác giả: [[GitHub](https://github.com/kkkknnnndd)
 
 ## NỀN TẢNG XÂY DỰNG
 ** IDE: ANDROID STUDIO
